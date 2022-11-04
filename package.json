@@ -2,6 +2,9 @@
   "name": "waterbird-population",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "14.x"
+  }
   "dependencies": {
     "@loadable/component": "^5.12.0",
     "@testing-library/jest-dom": "^4.2.4",
@@ -79,8 +82,5 @@
     "husky": "^4.0.10",
     "prettier": "^2.0.4",
     "redux-devtools-cli": "^0.0.1-1"
-  },
-  "engines" : { 
-    "node" : "=14.17.6"
   }
 }
