@@ -24,7 +24,7 @@ export const API = setup({
 
 export const fetchFlyways = () => {
 
-  const q = `SELECT id, flywayrange, TRIM(flywaygroup) as flywaygroup FROM flyway`;
+  const q = `SELECT id, flywayrange, TRIM(flywaygroup) as flywaygroup FROM flyway`.replace(/\n/g, ' ');
 
   return API.get(`sql?q=${encodeURIComponent(q)}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}`)
   .then(({ data }) => data.rows)

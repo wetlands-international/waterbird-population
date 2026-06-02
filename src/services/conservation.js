@@ -20,7 +20,7 @@ export const API = setup({
 });
 
 export const fetchConservationFrameworks = () => {
-  const q = `SELECT id,code,description FROM protection`;
+  const q = `SELECT id,code,description FROM protection`.replace(/\n/g, ' ');
 
   return API.get(`sql?q=${encodeURIComponent(q)}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}`)
     .then(({ data }) => data.rows)

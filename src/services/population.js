@@ -130,7 +130,7 @@ export const fetchPopulations = (specieid) => {
   familyorder_name,
   family_disposition,
   redlistcategory_name,
-  redlistcategory_id`;
+  redlistcategory_id`.replace(/\n/g, ' ');
 
   return API.get(`sql?q=${encodeURIComponent(q)}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}`)
     .then(({ data, status }) => {
@@ -182,7 +182,7 @@ export const fetchDataToDownload = (dataSpecs) => {
   LEFT JOIN qualitycodetrend q ON q.id = t.trend_id
    ${population_ids ? `where o.populationid IN (${population_ids})` : ''}
    ${specie_id ? `where species_id=${specie_id}` : ''}
-   ${population_id ? `and o.populationid=${population_id}` : ''}`;
+   ${population_id ? `and o.populationid=${population_id}` : ''}`.replace(/\n/g, ' ');
 
   return API.get(`sql?q=${q}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}`).then(
     ({ data }) => data.rows
@@ -232,7 +232,7 @@ export const fetchDataToDownloadAnalyze = (dataSpecs) => {
   LEFT JOIN qualitycodesize qcs ON qcs.id = s.estimatequality_id
   where p.publication_id is not null
    ${specie_id ? `where species_id=${specie_id}` : ''}
-   and pub.description NOT like '%draft%'`;
+   and pub.description NOT like '%draft%'`.replace(/\n/g, ' ');
 
   return API.get(
     `sql?q=${encodeURIComponent(q)}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}`
@@ -279,7 +279,7 @@ export const fetchPopulationsCardData = (dataSpecs) => {
   LEFT JOIN qualitycodetrend q ON q.id = t.trendquality_id
   LEFT JOIN qualitycodesize qcs ON qcs.id = s.estimatequality_id
    ${publicationId ? 'where p.publication_id is not null' : ''}
-   ${populationId ? `and n.id=${populationId}` : ''} and pub.description NOT like '%draft%'`;
+   ${populationId ? `and n.id=${populationId}` : ''} and pub.description NOT like '%draft%'`.replace(/\n/g, ' ');
   return API.get(
     `sql?q=${encodeURIComponent(q)}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}`
   ).then(({ data }) => data.rows);
@@ -294,7 +294,7 @@ export const fetchPopulationsByLocation = (lng, lat) => {
     wpepopid FROM species_and_flywaygroups WHERE
   ST_Intersects(
              ST_SetSRID(
-                ST_MakePoint(${lng},${lat}),4326),the_geom)`;
+                ST_MakePoint(${lng},${lat}),4326),the_geom)`.replace(/\n/g, ' ');
 
   return API.get(`sql?q=${q}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}`).then(
     ({ data, status }) => {
@@ -314,7 +314,7 @@ SELECT the_geom,
     ST_Xmin(the_geom) as xmin,
     ST_Ymin(the_geom) as ymin,
     ST_Xmax(the_geom) as xmax,
-    ST_Ymax(the_geom) as ymax FROM bbox`;
+    ST_Ymax(the_geom) as ymax FROM bbox`.replace(/\n/g, ' ');
 
   return API.get(`sql?q=${q}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}`).then(
     ({ data, status }) => {

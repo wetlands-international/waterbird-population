@@ -24,7 +24,7 @@ export const API = setup({
 
 export const fetchRedListCategories = () => {
 
-  const q = `SELECT id,iucn,description FROM redlistcategory WHERE description != ' Not evaluated'`;
+  const q = `SELECT id,iucn,description FROM redlistcategory WHERE description != ' Not evaluated'`.replace(/\n/g, ' ');
 
   return API.get(`sql?q=${encodeURIComponent(q)}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}`)
   .then(({ data }) => data.rows)

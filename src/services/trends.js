@@ -91,7 +91,7 @@ export const fetchTrends = () => {
     specie_scientificname,
     family_id,
     family_name,
-    familyorder_name`;
+    familyorder_name`.replace(/\n/g, ' ');
 
   return API.get(`sql?q=${q}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}`)
     .then(({ data, status }) => { return { data: data.rows, status }})
@@ -101,7 +101,7 @@ export const fetchTrends = () => {
 };
 
 export const fetchTrendCategories = () => {
-  const q = `SELECT DISTINCT trendsum FROM trend`;
+  const q = `SELECT DISTINCT trendsum FROM trend`.replace(/\n/g, ' ');
   return API.get(`sql?q=${q}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}`)
   .then(({ data, status }) => {
     return {

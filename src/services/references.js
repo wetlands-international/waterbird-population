@@ -21,7 +21,7 @@ export const API = setup({
 
 export const fetchReferences = () => {
   const api_key = `${process.env.REACT_APP_CARTO_API_TOKEN}`;
-  const q = `SELECT id, body, notes FROM reference`;
+  const q = `SELECT id, body, notes FROM reference`.replace(/\n/g, ' ');
   return API.get(`sql?q=${encodeURIComponent(q)}&api_key=${api_key}`)
     .then(({ data, status }) => {
       return { data: data.rows, status };
@@ -34,7 +34,7 @@ export const fetchReferences = () => {
 
 export const fetchReferencesToDownload = () => {
   const api_key = `${process.env.REACT_APP_CARTO_API_TOKEN}`;
-  const q = `SELECT body, notes FROM reference`;
+  const q = `SELECT body, notes FROM reference`.replace(/\n/g, ' ');
   return API.get(`sql?q=${encodeURIComponent(q)}&api_key=${api_key}`)
     .then(({ data }) => data.rows)
     .catch((e) => {
