@@ -24,7 +24,7 @@ export const fetchComments = (publication_id, population_id, size_id, trend_id, 
     AND population_id = ${population_id}
     ${size_id ? `AND size_id = ${size_id}` : ''}
     ${trend_id ? `AND trend_id = ${trend_id}` : ''}
-    ${onepercet_id ? `AND onepercent_id = ${onepercet_id}` : ''}`;
+    ${onepercet_id ? `AND onepercent_id = ${onepercet_id}` : ''}`.replace(/\n/g, ' ');
 
   return API.post(`sql?q=${encodeURIComponent(q)}&api_key=${api_key}`)
     .then(({ data }) => data.rows)
@@ -65,7 +65,7 @@ export const createComment = ({
     '${Id}',
     '${comment}',
     '${date}'
-  )`;
+  )`.replace(/\n/g, ' ');
   return API.post(`sql?q=${encodeURIComponent(q)}&api_key=${api_key}`);
 };
 
@@ -79,7 +79,7 @@ export const deleteComment = (params = {}, headers = {}) => {
 
 export const updateComment = (column_to_update, update, condition) => {
   const api_key = `${process.env.REACT_APP_CARTO_API_TOKEN}`;
-  const q = `UPDATE comments SET ${column_to_update} = '${update}' WHERE ${condition}`;
+  const q = `UPDATE comments SET ${column_to_update} = '${update}' WHERE ${condition}`.replace(/\n/g, ' ');
 
   return API.post(`sql?q=${encodeURIComponent(q)}&api_key=${api_key}`);
 };

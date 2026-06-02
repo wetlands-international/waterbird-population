@@ -622,8 +622,7 @@ export const selectPopulationLayers = createSelector(
         type: 'geojson',
         source: {
           type: 'geojson',
-          data: `${process.env.REACT_APP_CARTO_BASE_URL}sql?q=
-          SELECT * from species_and_flywaygroups where wpesppid = {{specieid}}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}&format=geojson`,
+          data: `${process.env.REACT_APP_CARTO_BASE_URL}sql?q=SELECT * from species_and_flywaygroups where wpesppid = {{specieid}}&api_key=${process.env.REACT_APP_CARTO_API_TOKEN}&format=geojson`,
           promoteId: 'wpepopid',
         },
         render: {
