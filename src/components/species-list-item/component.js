@@ -67,7 +67,7 @@ const SpeciesListItem = ({ specie }) => {
         </Button>
       </div>
       <div className={classnames('species-results-description', { '-hidden': isCollapsed })}>
-        {image.thumbnail && <img src={image.thumbnail.source} alt={image.title} />}
+        {image && image.thumbnail && <img src={image.thumbnail.source} alt={image.title} />}
       </div>
 
       {!isCollapsed && <PopulationsList specieId={specie.id} />}
