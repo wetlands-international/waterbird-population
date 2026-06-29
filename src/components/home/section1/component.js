@@ -21,18 +21,18 @@ const Section1 = ({ setFilters, filters }) => {
   };
 
   const label = (e) => {
-    const renamedLabels = [
-      { value: 'CAF Action Plan', label: 'CMS Central Asian Flyway' },
-      { value: 'EAAFP Partnership', label: 'East Asian-Australasian Flyway Partnership' },
-      { value: 'EUBD', label: 'EU Birds Directive' },
-      { value: 'AEWA', label: 'African-Eurasian Migratory Waterbird Agreement' },
-      { value: 'WHSRN', label: 'Western Hemisphere Shorebird Reserve Network' },
-    ];
-
-    return renamedLabels.reduce((acc, word) => {
-      return acc.includes(word.value) ? acc.replace(word.value, word.label) : acc;
-    }, e);
+  const renamedLabels = {
+    'CAF Action Plan': 'CMS Central Asian Flyway',
+    'EAAF Partnership': 'East Asian-Australasian Flyway Partnership',
+    'EUBD': 'EU Birds Directive',
+    'AEWA': 'African-Eurasian Migratory Waterbird Agreement',
+    'WHSRN': 'Western Hemisphere Shorebird Reserve Network',
+    'CAFF': 'Conservation of Arctic Flora and Fauna',
+    'Ramsar Convention': 'Ramsar Convention on Wetlands',
   };
+
+  return renamedLabels[e] ?? e;
+};
 
   return (
     <section className="c-section1">
@@ -46,7 +46,7 @@ const Section1 = ({ setFilters, filters }) => {
         <div className="row start-xs">
           <div className="col-md-7 col-sm-12">
             <h1>
-              Waterbirds <br /> Populations Portal
+              Waterbird <br /> Populations Portal
             </h1>
           </div>
         </div>
@@ -67,7 +67,7 @@ const Section1 = ({ setFilters, filters }) => {
           <div className="col-sm">
             <nav>
               <ul className="row start-lg center-xs equal-height">
-                {filterIds &&
+                  {filterIds &&
                   filterIds.length &&
                   filterIds.map(({ id, code }) => (
                     <div key={code} className="col-lg-4 col-md-6 col-xsm-12 center-xs">
@@ -78,27 +78,12 @@ const Section1 = ({ setFilters, filters }) => {
                             payload: { pathname: 'explore' },
                             query: { conservation: id },
                           }}
-                          onClick={() => handleClick(id)}
-                        >
+                          onClick={() => handleClick(id)}                        >
                           {label(code)}
                         </Link>
                       </li>
                     </div>
-                  ))}
-                <div className="col-lg-4 col-md-6 col-xsm-12 center-xs">
-                  <li key="ramsar">
-                    <Link
-                      to={{
-                        type: 'EXPLORE',
-                        payload: { pathname: 'explore' },
-                        query: { publication: 5 },
-                      }}
-                      onClick={() => handleClick(5)}
-                    >
-                      RAMSAR: Ramsar Convention on Wetlands
-                    </Link>
-                  </li>
-                </div>
+                  ))}                                   
               </ul>
             </nav>
           </div>
